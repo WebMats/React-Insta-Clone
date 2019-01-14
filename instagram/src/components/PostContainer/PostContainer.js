@@ -11,7 +11,7 @@ const postContainer = (props) => (
 )
 
 postContainer.propTypes = {
-        comments: PropTypes.arrayOf(PropTypes.object).isRequired
+        comments: PropTypes.array
 }
 
 export default postContainer;
