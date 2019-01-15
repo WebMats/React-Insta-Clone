@@ -15,7 +15,10 @@ const commentSection = (props) => {
                 <React.Fragment>
                         <CommentIcons likes={props.likes} />
                         {comments}
-                        <input name="newComment" placeholder="Add a comment..." />
+                        <div style={{padding: "0 2rem", position: "relative"}}>
+                                <input className="CommentInput" name="newComment" placeholder="Add a comment..." />
+                                <span className="TripleDot">&middot;&middot;&middot;</span>
+                        </div>
                 </React.Fragment>
         )
 }

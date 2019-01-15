@@ -11,7 +11,7 @@ const searchBar = (props) => (
                         <h1>Instagram</h1>
                 </div>
                 <div>
-                        <input name="searchBar" placeholder="Search" className="SearchInput" />
+                        <input name="searchBar" placeholder='Search' className="SearchInput" />
                 </div>
                 <div className="IconHolder">
                         <span><i class="far fa-compass"></i></span>

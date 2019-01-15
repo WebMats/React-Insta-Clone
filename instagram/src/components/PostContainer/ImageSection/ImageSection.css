@@ -1,15 +1,15 @@
 .ProfileHolder img {
     border-radius: 50%;
     /* transform: scale(.2); */
-    height: 30px;
-    width: 30px;
+    height: 32px;
+    width: 32px;
 }
 .ProfileHolder {
     display: flex;
     align-items: center;
     width: 64rem;
     margin: 0 auto;
-    padding: 1rem;
+    padding: 1.6rem;
 }
 .ProfileHolder > h2 {
     height: 20px;
