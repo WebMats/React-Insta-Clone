@@ -13,8 +13,9 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.setState({dummyData})
+    this.setState({dummyData: localStorage.getItem('data') === null ? dummyData : JSON.parse(localStorage.getItem('data'))})
   }
+
   searchUserHandler = (e) => {
     e.preventDefault();
     this.setState(prevState => {
@@ -26,12 +27,25 @@ class App extends Component {
     })
   }
 
+  saveDataInLocalStorage = () => {
+    localStorage.setItem('data', JSON.stringify(this.state.dummyData));
+  }
+
+  updateCommentsHandler = (newComments, i) => {
+    this.setState(prevState => {
+      const copiedData = [...prevState.dummyData];
+      copiedData[i].comments = newComments;
+      return {dummyData: copiedData}
+    }, this.saveDataInLocalStorage)
+  }
+
   render() {
-    const posts = this.state.dummyData.map(post => (<PostContainer key={post.username} post={post}/>))
+    // console.log(this.state.dummyData)
+    const posts = this.state.dummyData.map((post, i) => (<PostContainer postIndex={i} updateComments={this.updateCommentsHandler} key={post.username} post={post}/>))
     return (
       <div className="App">
         <SearchBar changed={(e) => this.setState({searchedUser: e.target.value})} inputValue={this.state.searchedUser} searchUser={this.searchUserHandler} />
-        {posts}
+          {posts}
       </div>
     );
   }

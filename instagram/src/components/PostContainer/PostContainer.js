@@ -14,18 +14,23 @@ class PostContainer extends Component {
                 liked: false
         }
 
-        submitCommentHandler = (e) => {
+        submitCommentHandler = async (e) => {
                 e.preventDefault();
-                this.setState(prevState => {
-                        let copiedComments = [...prevState.comments];
-                        copiedComments.push({ username: this.props.post.username, text: this.state.newComment});
-                        return {newComment: '', comments: copiedComments};
-                })
+                try {
+                        await this.setState(prevState => {
+                                let copiedComments = [...prevState.comments];
+                                copiedComments.push({ username: this.props.post.username, text: this.state.newComment});
+                                return {newComment: '', comments: copiedComments};
+                        });
+                        this.props.updateComments(this.state.comments, this.props.postIndex)
+                } catch(err) {
+                        throw err;
+                }
+
         }
 
 
         render() {
-                console.log(this.state.liked)
         return (
                 <div className="PostContainer">
                         <ImageSection 
