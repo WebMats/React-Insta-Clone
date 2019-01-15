@@ -10,7 +10,8 @@ import './PostContainer.css';
 class PostContainer extends Component {
         state = {
                 newComment: '',
-                comments: this.props.post.comments
+                comments: this.props.post.comments,
+                liked: false
         }
 
         submitCommentHandler = (e) => {
@@ -22,7 +23,9 @@ class PostContainer extends Component {
                 })
         }
 
+
         render() {
+                console.log(this.state.liked)
         return (
                 <div className="PostContainer">
                         <ImageSection 
@@ -31,10 +34,12 @@ class PostContainer extends Component {
                                 imageUrl={this.props.post.imageUrl} 
                         />
                         <CommentSection 
-                                changed={(e) => {this.setState({newComment: e.target.value})}} 
+                                changed={(e) => this.setState({newComment: e.target.value})} 
                                 inputValue={this.state.newComment} likes={this.props.post.likes} 
                                 comments={this.state.comments}
-                                submitComment={this.submitCommentHandler} 
+                                submitComment={this.submitCommentHandler}
+                                liked={this.state.liked}
+                                toggleLike={() => this.setState(prevState => ({liked: !prevState.liked}))} 
                         />
                 </div>
         )

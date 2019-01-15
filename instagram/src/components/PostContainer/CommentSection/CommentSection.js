@@ -13,7 +13,7 @@ const commentSection = (props) => {
 
         return (
                 <React.Fragment>
-                        <CommentIcons likes={props.likes} />
+                        <CommentIcons liked={props.liked} likes={props.likes} clicked={props.toggleLike}/>
                         {comments}
                         <form onSubmit={props.submitComment} style={{padding: "0 2rem", position: "relative"}} autoComplete="off">
                                 <input 
