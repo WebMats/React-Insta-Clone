@@ -1,0 +1,11 @@
+.Comment > .Username {
+    font-weight: 800;
+    font-size: 1.6rem;
+}
+
+.Comment {
+    font-size: 1.4rem;
+    margin: 1rem 0;
+    padding-left: 2rem;
+    letter-spacing: 1.1px;
+}
