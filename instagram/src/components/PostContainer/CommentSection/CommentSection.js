@@ -10,7 +10,12 @@ const commentSection = (props) => {
 
         const comments = props.comments.map((comment, i) => (<Comment key={i} comment={comment} />))
 
-        return comments;
+        return (
+                <React.Fragment>
+                        {comments}
+                        <input name="newComment" placeholder="Add a comment..." />
+                </React.Fragment>
+        )
 }
 
 commentSection.propTypes = {
