@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import './ImageSection.css';
 
@@ -12,5 +13,11 @@ const imageSection = (props) => (
         </React.Fragment>
         
 )
+
+imageSection.propTypes ={ 
+        thumbnail: PropTypes.string,
+        user: PropTypes.string,
+        imageUrl: PropTypes.string
+}
 
 export default imageSection;

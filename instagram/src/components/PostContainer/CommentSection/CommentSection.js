@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Comment from './Comment/Comment';
+import CommentIcons from './CommentIcons/CommentIcons.js';
 
 import './CommentSection.css';
 
@@ -12,6 +13,7 @@ const commentSection = (props) => {
 
         return (
                 <React.Fragment>
+                        <CommentIcons likes={props.likes} />
                         {comments}
                         <input name="newComment" placeholder="Add a comment..." />
                 </React.Fragment>

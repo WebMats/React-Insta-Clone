@@ -10,7 +10,7 @@ import './PostContainer.css';
 const postContainer = ({post}) => (
         <div className="PostContainer">
                 <ImageSection user={post.username} thumbnail={post.thumbnailUrl} imageUrl={post.imageUrl} />
-                <CommentSection comments={post.comments} />
+                <CommentSection likes={post.likes} comments={post.comments} />
         </div>
        
 )
