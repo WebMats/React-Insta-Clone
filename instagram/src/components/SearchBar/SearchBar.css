@@ -45,4 +45,5 @@
 .IconHolder > span * {
     font-size: 24px;
     color: rgb(158, 158, 158);
+    -webkit-text-stroke: 1px white;
 }

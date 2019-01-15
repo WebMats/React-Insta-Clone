@@ -15,10 +15,16 @@ const commentSection = (props) => {
                 <React.Fragment>
                         <CommentIcons likes={props.likes} />
                         {comments}
-                        <div style={{padding: "0 2rem", position: "relative"}}>
-                                <input className="CommentInput" name="newComment" placeholder="Add a comment..." />
+                        <form onSubmit={props.submitComment} style={{padding: "0 2rem", position: "relative"}} autoComplete="off">
+                                <input 
+                                        value={props.inputValue} 
+                                        onChange={props.changed} 
+                                        className="CommentInput" 
+                                        name="newComment" 
+                                        placeholder="Add a comment..." 
+                                />
                                 <span className="TripleDot">&middot;&middot;&middot;</span>
-                        </div>
+                        </form>
                 </React.Fragment>
         )
 }
