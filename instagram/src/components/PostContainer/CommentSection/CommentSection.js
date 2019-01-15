@@ -9,7 +9,13 @@ import './CommentSection.css';
 
 const commentSection = (props) => {
 
-        const comments = props.comments.map((comment, i) => (<Comment key={i} comment={comment} />))
+        const comments = props.comments.map((comment, i) => (<Comment
+                                                                toDelete={props.toBeDeleted === i ? true : null}
+                                                                 clicked={() => props.showDelete(comment, i)} 
+                                                                 key={i} 
+                                                                 comment={comment}
+                                                                 deleted={() => props.delete(comment, i)} 
+                                                                />))
 
         return (
                 <React.Fragment>
