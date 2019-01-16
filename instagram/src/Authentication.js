@@ -7,11 +7,12 @@ const authentication = App => Login => {
             super();
             this.state = {
                 loggedIn: false,
-                userName: ''
+                userName: '',
+                password: '',
             }
         }
         componentDidMount() {
-            if (localStorage.getItem('username') !== null) {
+            if (localStorage.getItem('username') !== null && localStorage.getItem('username').length !== 0) {
                 this.setState({loggedIn: true, userName: localStorage.getItem('username')})
             }
         }
@@ -19,7 +20,13 @@ const authentication = App => Login => {
             localStorage.setItem('username', this.state.userName);
           }
         render() {
-            return this.state.loggedIn ? <App user={this.state.userName} /> : <Login changed={(e) => this.setState({userName: e.target.value})} inputValue={this.state.userName} submitCredentials={this.loginHandler} />;
+            return this.state.loggedIn ? <App user={this.state.userName} /> : <Login 
+                                                                                changed={(e) => this.setState({userName: e.target.value})} 
+                                                                                inputValue={this.state.userName} 
+                                                                                submitCredentials={this.loginHandler} 
+                                                                                inputPassword={this.state.password}
+                                                                                passwordChange={(e) => this.setState({password: e.target.value})}
+                                                                            />;
         }
     }
 }
