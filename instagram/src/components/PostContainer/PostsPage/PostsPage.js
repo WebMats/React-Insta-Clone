@@ -40,7 +40,12 @@ class PostsPage extends Component {
       }
 
     render(){
-        const posts = this.state.dummyData.map((post, i) => (<PostContainer postIndex={i} updateComments={this.updateCommentsHandler} key={post.username} post={post}/>))
+        const posts = this.state.dummyData.map((post, i) => (<PostContainer 
+                                                                user={this.props.user} 
+                                                                postIndex={i} 
+                                                                updateComments={this.updateCommentsHandler} 
+                                                                key={post.username} post={post}
+                                                            />))
         return (    
             <React.Fragment>
                 <SearchBar changed={(e) => this.setState({searchedUser: e.target.value})} inputValue={this.state.searchedUser} searchUser={this.searchUserHandler} />
