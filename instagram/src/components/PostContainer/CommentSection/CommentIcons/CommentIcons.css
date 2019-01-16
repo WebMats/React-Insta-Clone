@@ -18,3 +18,8 @@
 .CommentIconHolder > .CommentIcons > span > i {
     transform: scaleX(-1);
 }
+
+.CommentIcons.Liked span:first-child * {
+    font-weight: 800;
+    color: rgb(245, 130, 130);
+}

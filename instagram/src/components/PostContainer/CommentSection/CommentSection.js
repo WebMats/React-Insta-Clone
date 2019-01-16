@@ -9,16 +9,28 @@ import './CommentSection.css';
 
 const commentSection = (props) => {
 
-        const comments = props.comments.map((comment, i) => (<Comment key={i} comment={comment} />))
+        const comments = props.comments.map((comment, i) => (<Comment
+                                                                toDelete={props.toBeDeleted === i ? true : null}
+                                                                 clicked={() => props.showDelete(comment, i)} 
+                                                                 key={i} 
+                                                                 comment={comment}
+                                                                 deleted={() => props.delete(comment, i)} 
+                                                                />))
 
         return (
                 <React.Fragment>
-                        <CommentIcons likes={props.likes} />
+                        <CommentIcons liked={props.liked} likes={props.likes} clicked={props.toggleLike}/>
                         {comments}
-                        <div style={{padding: "0 2rem", position: "relative"}}>
-                                <input className="CommentInput" name="newComment" placeholder="Add a comment..." />
+                        <form onSubmit={props.submitComment} style={{padding: "0 2rem", position: "relative"}} autoComplete="off">
+                                <input 
+                                        value={props.inputValue} 
+                                        onChange={props.changed} 
+                                        className="CommentInput" 
+                                        name="newComment" 
+                                        placeholder="Add a comment..." 
+                                />
                                 <span className="TripleDot">&middot;&middot;&middot;</span>
-                        </div>
+                        </form>
                 </React.Fragment>
         )
 }

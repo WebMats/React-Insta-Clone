@@ -10,9 +10,9 @@ const searchBar = (props) => (
                         <div className="VerticalLine"></div>
                         <h1>Instagram</h1>
                 </div>
-                <div>
-                        <input name="searchBar" placeholder='Search' className="SearchInput" />
-                </div>
+                <form onSubmit={props.searchUser} autoComplete="off">
+                        <input value={props.inputValue} onChange={props.changed} name="searchBar" placeholder='Search' className="SearchInput" />
+                </form>
                 <div className="IconHolder">
                         <span><i class="far fa-compass"></i></span>
                         <span><i class="far fa-heart"></i></span>

@@ -3,17 +3,49 @@ import React, { Component } from 'react';
 import PostContainer from './components/PostContainer/PostContainer';
 import SearchBar from './components/SearchBar/SearchBar';
 import dummyData from './dummy-data';
-
 import './App.css';
 
 
 class App extends Component {
+  state = {
+    dummyData: [],
+    searchedUser: ''
+  }
+
+  componentDidMount() {
+    this.setState({dummyData: localStorage.getItem('data') === null ? dummyData : JSON.parse(localStorage.getItem('data'))})
+  }
+
+  searchUserHandler = (e) => {
+    e.preventDefault();
+    this.setState(prevState => {
+      if (prevState.searchedUser.length === 0) {
+        return this.setState({dummyData})    
+      }
+      const copiedData = [...prevState.dummyData].filter(post => post.username.includes(prevState.searchedUser))
+      return {dummyData: copiedData, searchedUser: '',}
+    })
+  }
+
+  saveDataInLocalStorage = () => {
+    localStorage.setItem('data', JSON.stringify(this.state.dummyData));
+  }
+
+  updateCommentsHandler = (newComments, i) => {
+    this.setState(prevState => {
+      const copiedData = [...prevState.dummyData];
+      copiedData[i].comments = newComments;
+      return {dummyData: copiedData}
+    }, this.saveDataInLocalStorage)
+  }
+
   render() {
-    const posts = dummyData.map(post => (<PostContainer key={post.username} post={post}/>))
+    // console.log(this.state.dummyData)
+    const posts = this.state.dummyData.map((post, i) => (<PostContainer postIndex={i} updateComments={this.updateCommentsHandler} key={post.username} post={post}/>))
     return (
       <div className="App">
-        <SearchBar />
-        {posts}
+        <SearchBar changed={(e) => this.setState({searchedUser: e.target.value})} inputValue={this.state.searchedUser} searchUser={this.searchUserHandler} />
+          {posts}
       </div>
     );
   }
