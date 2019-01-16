@@ -33,14 +33,14 @@ class App extends Component {
 
   updateCommentsHandler = (newComments, i) => {
     this.setState(prevState => {
-      const copiedData = [...prevState.dummyData];
-      copiedData[i].comments = newComments;
+      let copiedData = [...prevState.dummyData];
+      const updatedPost = {...copiedData[i], comments: newComments}
+      copiedData.splice(i, 1, updatedPost);
       return {dummyData: copiedData}
     }, this.saveDataInLocalStorage)
   }
 
   render() {
-    // console.log(this.state.dummyData)
     const posts = this.state.dummyData.map((post, i) => (<PostContainer postIndex={i} updateComments={this.updateCommentsHandler} key={post.username} post={post}/>))
     return (
       <div className="App">

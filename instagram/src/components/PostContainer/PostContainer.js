@@ -21,7 +21,7 @@ class PostContainer extends Component {
                 try {
                         await this.setState(prevState => {
                                 let copiedComments = [...prevState.comments];
-                                copiedComments.push({ username: this.props.post.username, text: this.state.newComment});
+                                copiedComments.push({ username: "Orlando", text: this.state.newComment});
                                 return {newComment: '', comments: copiedComments};
                         });
                         this.props.updateComments(this.state.comments, this.props.postIndex)
