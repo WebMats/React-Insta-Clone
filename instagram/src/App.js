@@ -1,54 +1,28 @@
 import React, { Component } from 'react';
 
-import PostContainer from './components/PostContainer/PostContainer';
-import SearchBar from './components/SearchBar/SearchBar';
-import dummyData from './dummy-data';
+import Authentication from './Authentication';
+import PostsPage from './components/PostContainer/PostsPage/PostsPage';
+import Login from './components/Login/Login';
 import './App.css';
 
 
 class App extends Component {
   state = {
-    dummyData: [],
-    searchedUser: ''
+    isAuthenticated: false
   }
 
-  componentDidMount() {
-    this.setState({dummyData: localStorage.getItem('data') === null ? dummyData : JSON.parse(localStorage.getItem('data'))})
-  }
+  loginHandler = (credentials) => {
 
-  searchUserHandler = (e) => {
-    e.preventDefault();
-    this.setState(prevState => {
-      if (prevState.searchedUser.length === 0) {
-        return this.setState({dummyData})    
-      }
-      const copiedData = [...prevState.dummyData].filter(post => post.username.includes(prevState.searchedUser))
-      return {dummyData: copiedData, searchedUser: '',}
-    })
-  }
-
-  saveDataInLocalStorage = () => {
-    localStorage.setItem('data', JSON.stringify(this.state.dummyData));
-  }
-
-  updateCommentsHandler = (newComments, i) => {
-    this.setState(prevState => {
-      let copiedData = [...prevState.dummyData];
-      const updatedPost = {...copiedData[i], comments: newComments}
-      copiedData.splice(i, 1, updatedPost);
-      return {dummyData: copiedData}
-    }, this.saveDataInLocalStorage)
   }
 
   render() {
-    const posts = this.state.dummyData.map((post, i) => (<PostContainer postIndex={i} updateComments={this.updateCommentsHandler} key={post.username} post={post}/>))
     return (
       <div className="App">
-        <SearchBar changed={(e) => this.setState({searchedUser: e.target.value})} inputValue={this.state.searchedUser} searchUser={this.searchUserHandler} />
-          {posts}
+        <PostsPage/>
+        <Login submitCredentials={this.loginHandler} />
       </div>
     );
   }
 }
 
-export default App;
+export default Authentication(App);
