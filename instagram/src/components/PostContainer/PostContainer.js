@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
 import ImageSection from './ImageSection/ImageSection';
 import CommentSection from './CommentSection/CommentSection';
 
-import './PostContainer.css';
 
+const Postcontainer = styled.div`
+        border: 1px solid rgb(219, 219, 219);
+        width: 641px;
+        margin: 5rem auto;
+`
 
 class PostContainer extends Component {
         state = {
@@ -21,7 +26,7 @@ class PostContainer extends Component {
                 try {
                         await this.setState(prevState => {
                                 let copiedComments = [...prevState.comments];
-                                copiedComments.push({ username: this.props.post.username, text: this.state.newComment});
+                                copiedComments.push({ username: this.props.user, text: this.state.newComment});
                                 return {newComment: '', comments: copiedComments};
                         });
                         this.props.updateComments(this.state.comments, this.props.postIndex)
@@ -59,7 +64,7 @@ class PostContainer extends Component {
 
         render() {
         return (
-                <div className="PostContainer">
+                <Postcontainer>
                         <ImageSection 
                                 user={this.props.post.username} 
                                 thumbnail={this.props.post.thumbnailUrl} 
@@ -76,7 +81,7 @@ class PostContainer extends Component {
                                 showDelete={this.commentToBeDeleted}
                                 delete={this.deleteCommentHandler} 
                         />
-                </div>
+                </Postcontainer>
         )
 }
 }
