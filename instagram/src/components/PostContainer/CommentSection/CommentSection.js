@@ -1,10 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import styled from 'styled-components';
 import Comment from './Comment/Comment';
 import CommentIcons from './CommentIcons/CommentIcons.js';
 
-import './CommentSection.css';
+
+
+const CommentInput = styled.input`
+        height: 5.5rem;
+        border: none;
+        font-size: 1.6rem;
+        padding-left: 4px;
+        border-top: 1px solid #ccc;
+        width: 100%;
+        outline: none;
+`
+const Span = styled.span`
+        font-size: 2.4rem;
+        position: absolute;
+        bottom: 1.4rem;
+        right: 1.7rem;
+`
 
 
 const commentSection = (props) => {
@@ -22,14 +38,13 @@ const commentSection = (props) => {
                         <CommentIcons liked={props.liked} likes={props.likes} clicked={props.toggleLike}/>
                         {comments}
                         <form onSubmit={props.submitComment} style={{padding: "0 2rem", position: "relative"}} autoComplete="off">
-                                <input 
+                                <CommentInput 
                                         value={props.inputValue} 
                                         onChange={props.changed} 
-                                        className="CommentInput" 
                                         name="newComment" 
                                         placeholder="Add a comment..." 
                                 />
-                                <span className="TripleDot">&middot;&middot;&middot;</span>
+                                <Span>&middot;&middot;&middot;</Span>
                         </form>
                 </React.Fragment>
         )
